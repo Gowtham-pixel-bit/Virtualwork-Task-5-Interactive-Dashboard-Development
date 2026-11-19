@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import streamlit.components.v1 as components
 
 # Page Configuration
 st.set_page_config(
@@ -149,7 +150,11 @@ if not filtered_df.empty:
 # Data Table
 st.subheader("📋 Business Sales Records")
 
-st.dataframe(filtered_df, use_container_width=True)
+components.html(
+    filtered_df.to_html(index=False),
+    height=400,
+    scrolling=True
+)
 
 # Download Button
 csv = filtered_df.to_csv(index=False).encode("utf-8")
